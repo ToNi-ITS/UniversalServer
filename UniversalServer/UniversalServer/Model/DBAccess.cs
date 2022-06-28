@@ -16,24 +16,16 @@ namespace UniversalServer.Model
         {
             //Hier die Verbindung zur DB herstellen. Siehe Info-Pool
             //Verbindungsdaten dürfen "hard codiert" werden.
-            ///Um diese Klassen benutzen zu können, müssen Sie den Namespace MySql.Data in den
-            ///using-Direktiven (siehe oben) hinzufügen. 
-            ///
-            ///Jetzt können wir als Erstes eine Verbindung zur Datenbank herstellen. In einem sog.
-            ///Connection-String geben wir die nötigen Verbindungsinformationen an:
-            ///- Server-Adresse/IP
-            ///- Name der Datenbank
-            ///- User, der auf die Datenbank zugreifen darf und
-            ///- Passwort (Sicherheitskriterien beachten!)
-            ///Natürlich müssen Datenbank und User auf der Datenbank existieren.
-            MySqlConnection con = new MySqlConnection(@"SERVER = myadmin.bfks.bplaced.net;DATABASE=bfks;UID=bfks_group;PASSWORD=*************;"); //PW wegen Git seperat gespeichert
+            MySqlConnection con = new MySqlConnection(@"SERVER = localhost;DATABASE=smarthome;USERID=bfks;PASSWORD=bfks;");
+            con.Open();
+        }
 
-            //Nachdem die Zugangsdaten gesetzt wurden, können wir den "Kanal" zur Datenbank öffnen.
-            con.Open();  //Jetzt greift unser Programm über das Netzwerk/lokal auf die Datenbank zu.
-
+        ///Diese Methode für den Datensatz in die Datenbank ein. Siehe Info-Pool      
+        public void InsertData(DateTime dt, TempValue t, HumidValue h, PressureValue p, string ipa)
+        {
             ///Nun können wir einen SQL-Befehl an die DB senden, der Daten in eine Tabelle einfügt. 
             ///Dies geht im einfachsten Fall über SQL-Befehle als String.
-            string insert = "INSERT INTO SmartHome (DateTime, TempValue, HumidValue, PressureValue) VALUES ('2022-03-03', 2, 3, 4)";
+            string insert = "INSERT INTO sensor VALUES(28-04-2022, 33, 74, 456)";
             //Damit der MySQL-Server das SQL-Statement verarbeiten kann, müssen wir es in einen MySqlCommand-Objekt umwandeln.
             //Dafür erstellen wir ein MySqlCommand-Objekt mit new...
             MySqlCommand cmd = new MySqlCommand();
@@ -46,13 +38,6 @@ namespace UniversalServer.Model
 
             //So, wenn alles funktioniert hat, solle nun in der Datenbank ein Eintrag in der Tabelle tbldemo vorhanden sein.
             //Überprüfen Sie dies....
-
-        }
-
-        ///Diese Methode für den Datensatz in die Datenbank ein. Siehe Info-Pool      
-        public void InsertData(TempValue t, HumidValue h, PressureValue p, DateTime dt, string ipa)
-        {
-
 
         }
 
